@@ -1,0 +1,70 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>pie test</title>
+	<style>
+	#canvas{
+		margin-left: 50px;
+		cursor: pointer;
+	}
+	p{
+		margin-left: 50px;
+		font-size: 18px;
+		transform:scale(0);
+		-webkit-transform:scale(0);
+		transition: transform 1s ease 0s;
+		-webkit-transition: -webkit-transform 1s ease 0s;
+		float: left;
+	}
+	.clearboth{
+		content:'.';
+		visibility:hidden;
+		clear: both;
+	}
+	.active{
+		transform:scale(1);
+		-webkit-transform:scale(1);
+	}
+	</style>
+<script src='jquery-1.8.3.min.js'></script>
+<!-- load hidpi-canvas.js if you are running at high device pixel rate -->
+<script src='hidpi-canvas.js'></script>
+<script src='pieChart.js' type="text/javascript"></script>
+</head>
+<body>
+	<canvas id='canvas' width="600" height="400"></canvas>
+	<div id='p-wrap'>
+		<p><span>figure: </span><span id='figure'></span></p>
+		<div class='clearboth'></div>
+		<p><span>percent: </span><span id='percent'></span></p>
+	</div>
+</body>
+
+
+<script>
+	$(
+		$('#canvas').pieChart({
+			data:{
+				  figure: [400.5, 202.55, 331.78, 308.12, 800.5],// your data input
+				  desc: ['jquery', 'angular', 'backbone', 'javascript', 'grunt'], // data description
+				  cap:'Usage Statistics:'},//caption
+
+			color:{
+				  origin: ['#C0232A', '#B6C335', '#FBCE0F', '#E87C24', '#28727B'],// color for each slice
+				  hover: ['#CD4F55', '#C3CF5C', '#FCD73F', '#EC9650', '#528E95']},// color when mouse hovering  
+
+			radius:0.5 // be noted it has to be btw 0 and 1 and 0.5 is recommened
+
+		}, function(figure, percent, origin){ // an optional callback function is supported when slice is clicked
+			$('#p-wrap').fadeOut(10, function(){
+				$('#figure').text(figure).parent().css('color',origin).removeClass('active')
+				$('#percent').text(percent).parent().css('color',origin).removeClass('active')
+				$(this).fadeIn(10, function(){
+					$('#figure').parent().addClass('active')
+					$('#percent').parent().addClass('active')
+				})
+			})
+		})
+	)
+</script>
+</html>
