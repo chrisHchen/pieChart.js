@@ -10,7 +10,7 @@ Make sure loading the pollyfill 'hidpi-canvas.js' if your want it to run on high
 $('#canvasid').pieChart(opt, callback)
 </code>
 <br/><br/>
-For more details please see the provided text.html file<br/>
+For more details see the provided text.html file<br/>
 <br/>
 Enjoy!
 
