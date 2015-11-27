@@ -1,9 +1,9 @@
-# pieChart.js
-a configrable Jquery-plugin pieChart running on canvas element.<br/>
-a callback function is also provided for more flexible DOM handling.</br>
-it is compatible running on high device pixel rate screens such as macbook retina by<br/>
+# <h2>pieChart.js</h2><br/>
+a configrable Jquery-plugin pieChart running on canvas element.<br/><br/>
+a callback function is also provided for more flexible DOM handling.</br><br/>
+it is compatible running on high device pixel rate screens such as macbook retina by<br/><br/>
 loading the pollyfill 'hidpi-canvas.js'</br>
-basic usage:</br><br/>
+<h3>basic usage:</h3>
 <code>
 $('#canvasid').pieChart(opt, callback)
 </code>
