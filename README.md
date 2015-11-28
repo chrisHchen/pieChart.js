@@ -10,7 +10,7 @@ make sure loading the pollyfill 'hidpi-canvas.js' before pieChart.js is loaded</
 $('#canvasid').pieChart(opt, callback)
 </code>
 <br/><br/>
-For more details see the provided text.html file<br/>
+For more details see the provided test.html file<br/>
 <br/>
 Enjoy!
 
