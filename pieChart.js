@@ -1,3 +1,5 @@
+
+
 //requestAnimationFrame polyfill
 (function() {
     var lastTime = 0;
@@ -95,7 +97,9 @@
 					requestAnimationFrame(_run)
 				} else{
 					//due to high dpi, here we use canvas.width instead of canvasW
-					imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+					if(ctx.getImageData){
+						imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+					}
 					if(chartData.length>1){
 						that.click(clickHandler)
 					}
@@ -164,7 +168,9 @@
 				
 				if(currentSeperateDistance < maxSeperateDistance){
 					requestAnimationFrame(_run)}else{
-						imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+						if(ctx.getImageData){
+							imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+						}
 						that.mousemove(moveHandler)
 						callback(chartData[currentSeperateSlice]['figure'], chartData[currentSeperateSlice]['percent']+'%',
 							chartData[currentSeperateSlice]['origin'])
@@ -177,7 +183,9 @@
 			currentSeperateSlice = -1
 			currentSeperateDistance = 0
 			drawPieChart()
-			imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+			if(ctx.getImageData){
+				imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+			}
 		}
 
 		function moveHandler(e){
@@ -190,13 +198,21 @@
 				for(var x in chartData){
 					if(clickAngle >= chartData[x]['startAngle'] && clickAngle < chartData[x]['endAngle']){
 						currentHoverSlice = x
-						ctx.putImageData(imageData,0,0)
+						if(ctx.putImageData){
+							ctx.putImageData(imageData,0,0)
+						}else{
+							drawPieChart()
+						}
 						drawSlice(x)
 						drawHoverDesc(x, distanceFromCenter ,clickAngle, vector)
 					}
 				}
 			}else{
-				ctx.putImageData(imageData,0,0)
+				if(ctx.putImageData){
+					//ctx.putImageData(imageData,0,0)
+				}else{
+					
+				}
 				currentHoverSlice = -1
 			}
 		}

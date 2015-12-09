@@ -1,7 +1,10 @@
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>pie test</title>
+	<!--[if IE]>
+		<script src="excanvas.js"></script>
+	<![endif]-->
 	<style>
 	#canvas{
 		margin-left: 50px;
@@ -27,12 +30,15 @@
 	}
 	</style>
 <script src='jquery-1.8.3.min.js'></script>
-<!-- load hidpi-canvas.js if you are running at high device pixel rate -->
+<!--[if !IE]><!-->
 <script src='hidpi-canvas.js'></script>
+<![endif]-->
 <script src='pieChart.js' type="text/javascript"></script>
 </head>
 <body>
-	<canvas id='canvas' width="600" height="400"></canvas>
+	<div>
+		<canvas id='canvas' width="600" height="400"></canvas>
+	</div>
 	<div id='p-wrap'>
 		<p><span>figure: </span><span id='figure'></span></p>
 		<div class='clearboth'></div>
@@ -42,29 +48,29 @@
 
 
 <script>
-	$(
+	$(document).ready(function(){
 		$('#canvas').pieChart({
-			data:{
-				  figure: [400.5, 202.55, 331.78, 308.12, 800.5],// your data input
-				  desc: ['jquery', 'angular', 'backbone', 'javascript', 'grunt'], // data description
-				  cap:'Usage Statistics:'},//caption
+		data:{
+			  figure: [400.5, 202.55, 331.78, 308.12, 800.5],// your data input
+			  desc: ['jquery', 'angular', 'backbone', 'javascript', 'grunt'], // data description
+			  cap:'Usage Statistics:'},//caption
 
-			color:{
-				  origin: ['#C0232A', '#B6C335', '#FBCE0F', '#E87C24', '#28727B'],// color for each slice
-				  hover: ['#CD4F55', '#C3CF5C', '#FCD73F', '#EC9650', '#528E95']},// color when mouse hovering  
+		color:{
+			  origin: ['#C0232A', '#B6C335', '#FBCE0F', '#E87C24', '#28727B'],// color for each slice
+			  hover: ['#CD4F55', '#C3CF5C', '#FCD73F', '#EC9650', '#528E95']},// color when mouse hovering  
 
-			radius:0.5 // be noted it has to be btw 0 and 1 and 0.5 is recommened
+		radius:0.5 // be noted it has to be btw 0 and 1 and 0.5 is recommened
 
-		}, function(figure, percent, origin){ // an optional callback function is supported when slice is clicked
-			$('#p-wrap').fadeOut(10, function(){
-				$('#figure').text(figure).parent().css('color',origin).removeClass('active')
-				$('#percent').text(percent).parent().css('color',origin).removeClass('active')
-				$(this).fadeIn(10, function(){
-					$('#figure').parent().addClass('active')
-					$('#percent').parent().addClass('active')
-				})
+	}, function(figure, percent, origin){ // an optional callback function is supported when slice is clicked
+		$('#p-wrap').fadeOut(10, function(){
+			$('#figure').text(figure).parent().css('color',origin).removeClass('active')
+			$('#percent').text(percent).parent().css('color',origin).removeClass('active')
+			$(this).fadeIn(10, function(){
+				$('#figure').parent().addClass('active')
+				$('#percent').parent().addClass('active')
 			})
 		})
-	)
+	})
+});
 </script>
 </html>
